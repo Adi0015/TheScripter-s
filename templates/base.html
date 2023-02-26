@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>My App</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function() {
+			// Handle clicks on nav links
+			$("nav a").click(function(e) {
+				e.preventDefault();
+				var url = $(this).attr("href");
+				loadPage(url);
+			});
+			
+			// Load default page
+			loadPage("/");
+		});
+		
+		function loadPage(url) {
+			// Load page content into main element
+			$.get(url, function(data) {
+				$("main").html(data);
+			});
+			
+			// Update nav link styles
+			$("nav a").removeClass("active");
+			$("nav a[href='" + url + "']").addClass("active");
+		}
+	</script>
+	<style>
+		nav {
+			background-color: lavender;
+			padding: 10px;
+			border-radius: 10px;
+			overflow: hidden;
+		}
+		
+		nav ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			display: flex;
+			justify-content: center;
+		}
+		
+		nav li {
+			margin: 0 10px;
+		}
+		
+		nav a {
+			color: #333;
+			text-decoration: none;
+			padding: 5px;
+			border-radius: 5px;
+			transition: background-color 0.2s ease;
+		}
+		
+		nav a:hover {
+			background-color: #333;
+			color: #fff;
+		}
+		
+		nav a.active {
+			background-color: #333;
+			color: #fff;
+		}
+		
+		main {
+			margin: 20px;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="/">Dashboard</a></li>
+				<li><a href="/aqi">AQI</a></li>
+				<li><a href="/weather">Weather</a></li>
+			</ul>
+		</nav>
+	</header>
+	
+	<main>
+		<!-- Content will be loaded here -->
+	</main>
+</body>
+</html>

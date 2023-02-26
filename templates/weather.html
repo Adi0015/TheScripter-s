@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Modern Weather Website</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}" > !-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src={{url_for('static',filename='js/weather.js')}}></script>
+</head>
+<body>
+	<!-- Header -->
+	<div class="header">
+		<a href="#">Modern Weather Website</a>
+	</div>
+	<!-- Navigation bar -->
+	<div class="navigation">
+	<select id="loc">
+		<option value="Adilabad">Adilabad, Telnagana </option>
+		<option value="Nizamabad">Nizamabad, Telnagana</option>
+		<option value="Khammam">Khammam, Telnagana</option>
+		<option value="Karimnagar">Karimnagar, Telnagana</option>
+		<option value="Warangal">Warangal, Telnagana</option>
+	</select>
+	<a href="">Home</a>
+	<a href="/aqi">AQI</a>
+	<a href="/weather">Weather</a>
+	</div>
+
+	<!-- Map with AQI values -->
+	
+	<!-- Heat wave prediction tile -->
+	<div class="tile">
+	<h2>Heat Wave Prediction</h2>
+	
+	</div>
+    
+	<h2 class="tile" id='tm' ><h1>Temprature</h1></h2><!--current temprature-->
+	<h2 class="tile" id='hu' ><h1>Humidity</h1></h2><!--current humidity-->
+	<h2 class="tile" id='ws' ><h1>Wind speed</h2></h2><!--current windspeed-->
+     
+	<!-- Footer -->
+	<footer>
+	<p>&copy; 2023 Modern Weather Website. All rights reserved.</p>
+	</footer>
+</body>
+</html>
