@@ -62,4 +62,7 @@ def Realtimeaqi(district):
     data = json.loads(response.read().decode())
     aqi_data = calculate_aqi(data)
     
-    return aqi_data
+    aqi,pollutant_concentrations, = aqi_data
+    print(pollutant_concentrations)
+    print(aqi)
+    return aqi,pollutant_concentrations

@@ -21,7 +21,11 @@ def Realaqi():
 
     loc = json.loads(request.data).get('loc')
     print(loc)
-    return jsonify({'result':Realtimeaqi(loc)})    
+    aqi_data, pollutant_data = Realtimeaqi(loc)
+    result = {'AQI': aqi_data['AQI'],"Main Pollutant": aqi_data['Main pollutant'],"value":aqi_data['value']}
+    for pollutant, conc in pollutant_data.items():
+        result[pollutant] = conc
+    return jsonify({'result': result})   
 
 @app.route('/aqi')
 def aqi():
