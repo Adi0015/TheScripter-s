@@ -2,7 +2,7 @@ import json
 # from urllib import request
 from flask import Flask, jsonify , render_template , url_for , request
 from weather_aqi import Realtimeweather,Realtimeaqi
-
+import weather_aqi
 app = Flask(__name__)
 
 @app.route('/')
@@ -37,3 +37,4 @@ def weather():
     
 if __name__ == '__main__':
     app.run(host='localhost', port=8080)
+    weather_aqi.run()

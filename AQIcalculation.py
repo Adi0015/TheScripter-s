@@ -31,9 +31,9 @@ def calculate_aqi(data):
         max_pollutant = "PM2.5"
     elif aqi_values.index(max_aqi) == 3:
         max_pollutant = "PM10"
-    print(aqi_pm10,aqi_pm25,pm10_conc)
+    # print(aqi_pm10,aqi_pm25,pm10_conc)
     aqi = {'AQI':max_aqi, "Main pollutant":max_pollutant,"value": max_pollutant_conc} 
-    all = {"PM10" : pm10_conc,"PM25":pm25_conc,"NO2":no2_conc,"SO2":so2_conc} 
+    all = {"PM10" : pm10_conc,"PM2.5":pm25_conc,"NO2":no2_conc,"SO2":so2_conc} 
     return aqi,all
 
 
