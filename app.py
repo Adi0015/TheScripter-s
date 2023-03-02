@@ -3,7 +3,9 @@ import pandas as pd
 # from urllib import request
 from flask import Flask, jsonify , render_template , url_for , request
 from weather_aqi import Realtimeweather,Realtimeaqi
-import weather_aqi
+from apscheduler.schedulers.background import BackgroundScheduler
+from datetime import datetime
+from weather_model import runner 
 app = Flask(__name__)
 
 @app.route('/')
@@ -36,16 +38,21 @@ def aqi():
 def weather():
     return render_template('weather.html')
 
-@app.route("/plot")
+    
+@app.route('/plot', methods=['GET', 'POST'])
 def plot():
-    loc = request.args.get("loc")
-    data = pd.read_csv("/Users/aman/Desktop/NASSCOM/WeatherData/df_2023_forecasted.csv")
-    filtered_data = data[data["District"] == loc]
-    x = filtered_data["Date"].tolist()
-    y = filtered_data['temp_max (⁰C)'].tolist()
-    return render_template("plot.html", x=x, y=y, loc=loc)
+    loc = request.args.get('loc')
+    df = pd.read_csv('Preprocessing/Weather/all_data.csv')
+    df = df[df['Address'] == loc]
+    x = df['Date time']
+    y = df['Minimum Temperature']
+    return jsonify({'x': x.tolist(), 'y': y.tolist(), 'loc': loc})
 
+def scheduled_job():
+    runner()
     
 if __name__ == '__main__':
     app.run(host='localhost', port=8080)
-    #weather_aqi.run()
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(scheduled_job, 'interval', days=1, start_date=datetime.today())
+    scheduler.start()

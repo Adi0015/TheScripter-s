@@ -22,15 +22,14 @@
         var x = {{ x|tojson }};
         var y = {{ y|tojson }};
         var loc = "{{ loc }}";
-
+    
         var trace = {
             x: x,
             y: y,
-            type: 'scatter',
-            mode: 'lines+markers',
+            type: 'bar',
             name: loc
         };
-
+    
         var layout = {
             title: 'Flask Plotly Graph',
             xaxis: {
@@ -40,11 +39,11 @@
                 title: 'y'
             }
         };
-
+    
         var data = [trace];
-
+    
         Plotly.newPlot('plot', data, layout);
-
+    
         function updateGraph() {
             var loc = document.getElementById("loc").value;
             fetch("/plot?loc=" + loc)
@@ -56,8 +55,7 @@
                     var trace = {
                         x: x,
                         y: y,
-                        type: 'scatter',
-                        mode: 'lines+markers',
+                        type: 'bar',
                         name: loc
                     };
                     var data = [trace];
@@ -65,5 +63,6 @@
                 });
         }
     </script>
+    
 </body>
 </html>
