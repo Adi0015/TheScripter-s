@@ -41,24 +41,74 @@ def calculate_aqi_pollutant(conc, pollutant):
 # Calculate AQI for each pollutant
 
 # Define the AQI breakpoints and corresponding values for each pollutant
+# Define the AQI breakpoints and corresponding values for each pollutant
     if pollutant == "SO2":
         breakpoints = [0, 40, 80, 380, 800, 1600]
-        aqi_values = [0, 50, 100, 200, 300, 400]
+        aqi_values = 	[0, 50, 100, 200, 300, 400, 500]
     elif pollutant == "O3":
-        breakpoints = [0, 50,100,168,208,748]
-        aqi_values = [0, 50, 100, 200, 300, 400]
+        breakpoints = 	[0, 50, 100, 168, 208, 748]
+        aqi_values = [0, 50, 100, 150, 200, 300, 400]
     elif pollutant == "NO2":
-        breakpoints = [0,40,80,180,280,400]
-        aqi_values = [0, 50, 100, 200, 300, 400]
+        breakpoints = [0, 40, 80, 180, 280, 400]
+        aqi_values = [0, 50, 100, 200, 300, 400, 500]
     elif pollutant == "PM10":
         breakpoints = [0, 50, 100, 250, 350, 430]
-        aqi_values = [0, 50, 100, 200, 300, 400]
+        aqi_values = [0, 50, 100, 200, 300, 400, 500]
     elif pollutant == "PM2.5":
-        breakpoints = [0,30,60,90,120,250]
-        aqi_values = [0, 50, 100, 200, 300, 400]
+        breakpoints = [0, 30, 60, 90, 120, 250, 350, 430]
+        aqi_values = [0, 50, 100, 200, 300, 400, 500]
     elif pollutant == "NH3":
         breakpoints = [0, 200, 400, 800, 1200, 1800]
-        aqi_values = [00, 50, 100, 200, 300, 400]
+        aqi_values = [0, 50, 100, 200, 300, 400, 500]
+    
+    
+    
+    
+    # if pollutant == "SO2":
+    #     breakpoints = 	[0, 20,40, 80, 160,400,600]
+    #     aqi_values = 	[0, 50, 100 , 150, 200, 300, 500]
+    # elif pollutant == "O3":
+    #     breakpoints = 		[0, 20,50,100,200,400,600]
+    #     aqi_values = [0, 50, 100 , 150, 200, 300, 500]
+    # elif pollutant == "NO2":
+    #     breakpoints = [0, 20,40, 80, 160,400,600]
+    #     aqi_values = [0, 50, 100 , 150, 200, 300, 500]
+    # elif pollutant == "PM10":
+    #     breakpoints = [0,30,60,100,200,300,400 ]
+    #     aqi_values = [0, 50, 100 , 150, 200, 300, 500]
+    # elif pollutant == "PM2.5":
+    #     breakpoints = [0, 20,40,60,100,200,300]
+    #     aqi_values = [0, 50, 100 , 150, 200, 300, 500]
+    # elif pollutant == "NH3":
+    #     breakpoints = [0, 200, 400, 800, 1200, 1800]
+    #     aqi_values = [0, 50, 100 , 150, 200, 300, 500]  
+        
+        
+        
+        
+    # if pollutant == "SO2":
+    #     breakpoints = 	[0, 40, 80, 380, 800, 1600]
+    #     aqi_values = 	[0, 50, 100, 150, 200, 300, 400]
+    # elif pollutant == "O3":
+    #     breakpoints = 	[0, 54, 70, 85, 105, 200, 405]
+    #     aqi_values = [0, 50, 100, 150, 200, 300, 400]
+    # elif pollutant == "NO2":
+    #     breakpoints = 	[0, 40, 80, 180, 280, 400]
+    #     aqi_values = [0, 50, 100, 150, 200, 300, 400]
+    # elif pollutant == "PM10":
+    #     breakpoints = 	[0, 54, 154, 254, 354, 424]
+    #     aqi_values = [0, 50, 100, 150, 200, 300, 400]
+    # elif pollutant == "PM2.5":
+    #     breakpoints = [0, 12, 35.4, 55.4, 150.4, 250.4, 350.4, 500.4]
+    #     aqi_values = [0, 50, 100, 150, 200, 300, 400]
+    # elif pollutant == "NH3":
+    #     breakpoints = [0, 200, 400, 800, 1200, 1800]
+    #     aqi_values = [0, 50, 100, 150, 200, 300, 400] 
+        
+        
+        
+        
+       
     else:
         raise ValueError("Invalid pollutant type")
 

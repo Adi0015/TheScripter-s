@@ -12,7 +12,7 @@ function getRecentData() {
         // console.log(data.result['temp_max (⁰C)','humidity_min (%)']) 
         document.getElementById('aqi').innerHTML="AQI"+" "+data.result['AQI']
         document.getElementById('pm10').innerHTML="PM10"+" "+data.result['PM10'] 
-        document.getElementById('pm25').innerHTML="PM2.5"+" "+data.result['PM25'] 
+        document.getElementById('pm25').innerHTML="PM2.5"+" "+data.result['PM2.5'] 
         document.getElementById('no2').innerHTML="NO2"+" "+data.result['NO2'] 
         document.getElementById('so2').innerHTML="SO2"+" "+data.result['SO2'] 
          
