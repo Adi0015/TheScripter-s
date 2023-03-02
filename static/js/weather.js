@@ -19,5 +19,5 @@ function getRecentData() {
   }
   
   $(document).ready(()=>{
-    setInterval(getRecentData,10000);
+    setInterval(getRecentData,5000);
   })
