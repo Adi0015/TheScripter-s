@@ -17,21 +17,21 @@ def datesForForecast():
 def weather_forecast(district):
     data = pd.read_csv("/Users/aman/Desktop/NASSCOM/TheScripter-s/Preprocessing/Weather/all_data.csv")
 
-    df = data[data['Address'] == district]
+    df = data[data['Location'] == district]
 
-    df['Date time'] = pd.to_datetime(df['Date time']).dt.date
+    df['Date'] = pd.to_datetime(df['Date']).dt.date
 
     train_end_date, train_start_date, pred_start_date, pred_end_date = datesForForecast()
 
-    temp = pd.DataFrame({'Date time': pd.date_range(pred_start_date, pred_end_date, freq='D'), 'Location': district,
+    temp = pd.DataFrame({'Date': pd.date_range(pred_start_date, pred_end_date, freq='D'), 'Location': district,
                          'Minimum Temperature': 0,
                          'Maximum Temperature': 0, 'Relative Humidity': 0})
 
     df = pd.concat([df, temp])
 
-    df['Date time'] = pd.to_datetime(df['Date time']).dt.date
+    df['Date'] = pd.to_datetime(df['Date']).dt.date
 
-    df = df.set_index('Date time')
+    df = df.set_index('Date')
 
     train_data = df[train_start_date:train_end_date].reset_index(drop=False)
 
@@ -56,7 +56,7 @@ def weather_forecast(district):
     humidity_predictions = results_humidity.predict(start=start_date, end=end_date, dynamic=False)
 
     predictions = pd.DataFrame(
-        {'Date time': pd.date_range(pred_start_date, pred_end_date, freq='D'), 'Location': district,
+        {'Date': pd.date_range(pred_start_date, pred_end_date, freq='D'), 'Location': district,
          'Minimum Temperature': temp_min_predictions,
          'Maximum Temperature': temp_max_predictions, 'Relative Humidity': humidity_predictions})
 
@@ -68,13 +68,13 @@ districts = ['Adilabad', 'Nizamabad', 'Khammam', 'Karimnagar', 'Warangal']
 
 def weather_runner():
     all_predictions = pd.DataFrame(
-        columns=['Date time', 'Location', 'Minimum Temperature', 'Maximum Temperature', 'Relative Humidity', ])
+        columns=['Date', 'Location', 'Minimum Temperature', 'Maximum Temperature', 'Relative Humidity' ])
     for district in districts:
         predictions = weather_forecast(district)
         predictions = predictions.drop_duplicates()
         all_predictions = pd.concat([all_predictions, predictions], axis=0, ignore_index=True)
 
-    all_predictions = all_predictions[all_predictions['Date time'] != str(date.today())]
+    all_predictions = all_predictions[all_predictions['Date'] != str(date.today())]
     all_predictions.to_csv("weather_forecast.csv", index=False)
 
 
