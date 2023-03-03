@@ -9,7 +9,6 @@ from datetime import datetime,timedelta
 from datetime import date,timedelta
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
-from AQIcalculation import calculate_aqi
 from weather_aqi import Realtimeaqi
 
 def datesForForecast():
@@ -20,7 +19,7 @@ def datesForForecast():
     
     return train_end_date,train_start_date,pred_start_date,pred_end_date
 
-def forecast(district):
+def AQI_forecast(district):
     data = pd.read_csv("/home/suku/Desktop/projects/T-aims/TheScripter-s/Preprocessing/AQI/AQI.csv")
     df = data[data['Location']==district]
    
@@ -73,12 +72,12 @@ def forecast(district):
     return predictions
     
     
-districts = ['Adilabad', 'Nizamabad',  'Khammam', 'Karimnagar',  'Warangal']
+
 
 def AQIrunner():
     all_predictions = pd.DataFrame(columns=['Date', 'Location', 'AQI', 'NO2', 'SO2', 'PM2.5', 'PM10'])
     for district in districts:
-        predictions = forecast(district)
+        predictions = AQI_forecast(district)
         predictions = predictions.drop_duplicates()
         all_predictions = pd.concat([all_predictions, predictions], axis=0, ignore_index=True)
         
@@ -87,43 +86,32 @@ def AQIrunner():
 
 
 
-def dataConsistence():
-    
-
+def AQI_dataConsistence():
     # Read existing data from AQI.csv file
     
     data = pd.read_csv("AQI.csv")
 
     # Define dictionary of district names and their corresponding lat/lon coordinates
-    dic = {"Adilabad": {'lon': 78.5, 'lat': 19.5}, 
-        "Nizamabad": {'lon': 78.25, 'lat': 18.75},
-        "Warangal": {'lon': 79.5971, 'lat': 17.9821},
-        "Karimnagar": {'lon': 79.1328, 'lat': 18.4348},
-        "Khammam": {'lon': 80.3333, 'lat': 17.5}}
-
+    districts = ['Adilabad', 'Nizamabad',  'Khammam', 'Karimnagar',  'Warangal']
     # Loop over each district and get AQI and pollutant concentration data
-    for district in dic.keys():
+    for district in districts:
         aqi, all_pollutants = Realtimeaqi(district)
-        
-        # Get latitude and longitude coordinates for current district
-        latlon = dic[district]
-        lat = latlon['lat']
-        lon = latlon['lon']
         
         # Create dictionary of data to append to AQI.csv
         data_to_append = {"Date": datetime.today().strftime('%Y-%m-%d'),
                         "Location": district,
                         "AQI": aqi['AQI'],
-                        "CO": all_pollutants.get('CO', ''),
-                        "NO": all_pollutants.get('NO', ''),
+                        # "CO": all_pollutants.get('CO', ''),
+                        # "NO": all_pollutants.get('NO', ''),
                         "NO2": all_pollutants.get('NO2', ''),
-                        "O3": all_pollutants.get('O3', ''),
+                        # "O3": all_pollutants.get('O3', ''),
                         "SO2": all_pollutants.get('SO2', ''),
                         "PM2.5": all_pollutants.get('PM2.5', ''),
-                        "PM10": all_pollutants.get('PM10', ''),
-                        "NH3": all_pollutants.get('NH3', ''),
-                        "Latitude": lat,
-                        "Longitude": lon}
+                        "PM10": all_pollutants.get('PM10', '')
+                        # "NH3": all_pollutants.get('NH3', ''),
+                        # "Latitude": lat,
+                        # "Longitude": lon
+                        }
         
         # Append data to AQI.csv file
         data = data.append(data_to_append, ignore_index=True)
