@@ -52,9 +52,10 @@ def weather_forecast(district):
 
     aqi_predictions = results_aqi.predict(start=start_date, end=end_date, dynamic=False)
 
-def Weatherrunner():
+# def Weatherrunner():
 
 def Weather_dataConsistence():
+
 #     dic = {"Adilabad":"{'lon': 78.5, 'lat': 19.5}", 
 #             "Nizamabad":"{'lon': 78.25, 'lat': 18.75}",
 #             "Warangal":"{'lon': 79.5971, 'lat': 17.9821}",

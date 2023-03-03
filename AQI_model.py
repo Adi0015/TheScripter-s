@@ -14,7 +14,7 @@ from weather_aqi import Realtimeaqi
 def datesForForecast():
     train_end_date = date.today() - timedelta(days=2)
     train_start_date = train_end_date - timedelta(days=672)
-    pred_start_date = date.today() + timedelta(days=1)
+    pred_start_date = date.today()
     pred_end_date = pred_start_date + timedelta(days=183)
     
     return train_end_date,train_start_date,pred_start_date,pred_end_date
@@ -72,7 +72,7 @@ def AQI_forecast(district):
     return predictions
     
     
-
+districts = ['Adilabad', 'Nizamabad',  'Khammam', 'Karimnagar',  'Warangal']
 
 def AQIrunner():
     all_predictions = pd.DataFrame(columns=['Date', 'Location', 'AQI', 'NO2', 'SO2', 'PM2.5', 'PM10'])
@@ -81,8 +81,8 @@ def AQIrunner():
         predictions = predictions.drop_duplicates()
         all_predictions = pd.concat([all_predictions, predictions], axis=0, ignore_index=True)
         
-        
-    all_predictions.to_csv("/home/suku/Desktop/projects/T-aims/TheScripter-s/Preprocessing/AQI/AQI_forecast.csv", index=False)
+    all_predictions = all_predictions[all_predictions['Date'] != str(date.today())]  
+    all_predictions.to_csv("AQI_forecast.csv", index=False)
 
 
 
@@ -92,32 +92,28 @@ def AQI_dataConsistence():
     data = pd.read_csv("AQI.csv")
 
     # Define dictionary of district names and their corresponding lat/lon coordinates
-    districts = ['Adilabad', 'Nizamabad',  'Khammam', 'Karimnagar',  'Warangal']
     # Loop over each district and get AQI and pollutant concentration data
     for district in districts:
         aqi, all_pollutants = Realtimeaqi(district)
         
         # Create dictionary of data to append to AQI.csv
         data_to_append = {"Date": datetime.today().strftime('%Y-%m-%d'),
-                        "Location": district,
+                        "Location": district + ', Telangana, India',
                         "AQI": aqi['AQI'],
-                        # "CO": all_pollutants.get('CO', ''),
-                        # "NO": all_pollutants.get('NO', ''),
+                        "CO": 0,
+                        "NO": 0,
                         "NO2": all_pollutants.get('NO2', ''),
-                        # "O3": all_pollutants.get('O3', ''),
+                        "O3": 0,
                         "SO2": all_pollutants.get('SO2', ''),
                         "PM2.5": all_pollutants.get('PM2.5', ''),
-                        "PM10": all_pollutants.get('PM10', '')
-                        # "NH3": all_pollutants.get('NH3', ''),
-                        # "Latitude": lat,
-                        # "Longitude": lon
-                        }
-        
+                        "PM10": all_pollutants.get('PM10', ''),
+                        "NH3": 0}
         # Append data to AQI.csv file
         data = data.append(data_to_append, ignore_index=True)
 
     # Write updated data to AQI.csv file
-    data  = data.groupby(['Date', 'Location']).mean()
+    data['Date'] = pd.to_datetime(data['Date'])
+    data  = data.groupby(['Date', 'Location']).mean().reset_index(drop=False)
     data.to_csv("AQI.csv", index=False)
 
     

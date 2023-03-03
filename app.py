@@ -63,5 +63,4 @@ if __name__ == '__main__':
     scheduler = BackgroundScheduler()
     scheduler.add_job(Model_Trainer, 'interval', days=7, start_date=datetime.today())
     scheduler.add_job(dataConsistence, 'interval', hours=2, start_date=datetime.today())
-
     scheduler.start()
