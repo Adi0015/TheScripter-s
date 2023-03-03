@@ -18,9 +18,8 @@ function updateGraph() {
         }
     });
 }
-window.onload = () => {
-    updateGraph()
-}
+setInterval(updateGraph,5000);
+
 
 function plt(x,y,loc){
     var trace = {

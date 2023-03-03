@@ -78,14 +78,14 @@ def weather_runner():
         all_predictions = pd.concat([all_predictions, predictions], axis=0, ignore_index=True)
 
     all_predictions = all_predictions[all_predictions['Date'] != str(date.today())]
-    all_predictions.to_csv("weather_forecast.csv", index=False)
+    all_predictions.to_csv("TheScripter-s/Data/Weather_Data/weather_forecast.csv", index=False)
 
 
 
 districts = ['Adilabad', 'Nizamabad',  'Khammam', 'Karimnagar',  'Warangal']
 
 def Weather_dataConsistence():
-    all_data = pd.read_csv("/Users/aman/Desktop/NASSCOM/TheScripter-s/Preprocessing/Weather/all_data.csv")
+    all_data = pd.read_csv("TheScripter-s/Preprocessing/Weather/all_data.csv")
     for district in districts:
         url = "https://visual-crossing-weather.p.rapidapi.com/history"
         startdate = datetime.date.today()
@@ -128,4 +128,4 @@ def Weather_dataConsistence():
         print(df)
         
     all_data  = all_data.groupby(['Date', 'Location']).mean().reset_index(drop=False)    
-    all_data.to_csv("df.csv",index=False)
+    all_data.to_csv("TheScripter-s/Preprocessing/Weather/all_data.csv",index=False)

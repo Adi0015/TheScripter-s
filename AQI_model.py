@@ -82,7 +82,7 @@ def AQIrunner():
         all_predictions = pd.concat([all_predictions, predictions], axis=0, ignore_index=True)
         
     all_predictions = all_predictions[all_predictions['Date'] != str(date.today())]  
-    all_predictions.to_csv("AQI_forecast.csv", index=False)
+    all_predictions.to_csv("TheScripter-s/Data/AQI Data/AQI_forecast.csv", index=False)
 
 
 

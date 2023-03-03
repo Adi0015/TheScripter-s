@@ -6,7 +6,7 @@ from weather_aqi import Realtimeweather,Realtimeaqi
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime
 from AQI_model import AQIrunner , AQI_dataConsistence
-from weather_model import  Weather_dataConsistence
+from weather_model import  weather_runner,Weather_dataConsistence
 app = Flask(__name__)
 
 @app.route('/')
@@ -54,7 +54,7 @@ def WeatherPlot():
 @app.route('/plot/aqi', methods=['GET', 'POST'])
 def AqiPlot():
     loc = request.args.get('loc')
-    df = pd.read_csv('Preprocessing/AQI/AQI.csv')
+    df = pd.read_csv('/home/suku/Desktop/projects/T-aims/TheScripter-s/Preprocessing/AQI/AQI.csv')
     df = df[df['Location'] == loc ]
     x = df['Date']
     y = df['AQI']
@@ -62,7 +62,7 @@ def AqiPlot():
 
 def Model_Trainer():
     AQIrunner()
-    # Weatherrunner()
+    weather_runner()
 
 def dataConsistence():
     AQI_dataConsistence()
