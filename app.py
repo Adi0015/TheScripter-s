@@ -6,7 +6,7 @@ from weather_aqi import Realtimeweather,Realtimeaqi
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime
 from AQI_model import AQIrunner , AQI_dataConsistence
-from weather_model import Weatherrunner, Weather_dataConsistence
+from weather_model import  Weather_dataConsistence
 app = Flask(__name__)
 
 @app.route('/')
@@ -41,8 +41,8 @@ def weather():
     return render_template('weather.html')
 
     
-@app.route('/plot', methods=['GET', 'POST'])
-def plot():
+@app.route('/plot/weather', methods=['GET', 'POST'])
+def WeatherPlot():
     loc = request.args.get('loc')
     df = pd.read_csv('Preprocessing/Weather/all_data.csv')
     df = df[df['Location'] == loc]
@@ -50,9 +50,19 @@ def plot():
     y = df['Minimum Temperature']
     return jsonify({'x': x.tolist(), 'y': y.tolist(), 'loc': loc})
 
+
+@app.route('/plot/aqi', methods=['GET', 'POST'])
+def AqiPlot():
+    loc = request.args.get('loc')
+    df = pd.read_csv('Preprocessing/AQI/AQI.csv')
+    df = df[df['Location'] == loc ]
+    x = df['Date']
+    y = df['AQI']
+    return jsonify({'x': x.tolist(), 'y': y.tolist(), 'loc': loc })
+
 def Model_Trainer():
     AQIrunner()
-    Weatherrunner()
+    # Weatherrunner()
 
 def dataConsistence():
     AQI_dataConsistence()

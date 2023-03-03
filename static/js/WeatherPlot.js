@@ -3,7 +3,7 @@ function updateGraph() {
     console.log(loc);
     $.ajax({
         type: "GET",
-        url: "/plot",
+        url: "/plot/weather",
         data: {
             loc: loc
         },
@@ -42,5 +42,5 @@ function plt(x,y,loc){
 
     var data = [trace];
 
-    Plotly.newPlot('plot', data, layout);
+    Plotly.newPlot('Wplot', data, layout);
 }
