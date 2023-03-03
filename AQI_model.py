@@ -24,14 +24,14 @@ def AQI_forecast(district):
     df = data[data['Location']==district]
    
     df['Date'] = pd.to_datetime(df['Date']).dt.date
-    
+    train_end_date, train_start_date, pred_start_date, pred_end_date = datesForForecast()
     
     temp = pd.DataFrame({'Date': pd.date_range(pred_start_date, pred_end_date, freq='D'),'Location': district,'AQI':0,'NO2':0,'SO2':0, 'PM2.5':0, 'PM10':0})
     df = pd.concat([df, temp])
     df['Date'] = pd.to_datetime(df['Date']).dt.date
     df = df.set_index('Date')
     
-    train_end_date, train_start_date, pred_start_date, pred_end_date = datesForForecast()
+    
 
     train_data = df[train_start_date:train_end_date].reset_index(drop=False)
     test_data = df[pred_start_date:pred_end_date].reset_index(drop=False)
