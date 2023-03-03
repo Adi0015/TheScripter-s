@@ -1,38 +1,25 @@
 import pandas as pd
 import numpy as np
 import seaborn as sns
+from datetime import date,timedelta
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 
+def datesForForecast():
+    train_end_date = date.today() - timedelta(days=1)
+    train_start_date = train_end_date - timedelta(days=672)
+    pred_start_date = date.today() + timedelta(days=1)
+    pred_end_date = pred_start_date + timedelta(days=183)
+    
+    return train_end_date,train_start_date,pred_start_date,pred_end_date
 
-
-def fit_and_forecast(variable, train_data, test_data):
-    # Creating SARIMAX Model
-    model = SARIMAX(train_data[variable], order=(1, 1, 0), seasonal_order=(1, 0, 1, 12))
-    results = model.fit()
-
-    # Predicting Variable
-    start_date = test_data.index[0]
-    end_date = test_data.index[-1]
-    predictions = results.predict(start=start_date, end=end_date, dynamic=False)
-        
-    return predictions
-
-def runner():
-    districts = ['Adilabad', 'Nizamabad',  'Khammam', 'Karimnagar',  'Warangal']
-    for district in districts :
-        df = pd.read_csv('weather_data.csv', index_col='Date', parse_dates=True)
-        
-        df_adilabad = df[df['District'] == district]
-        
-        
-        
-        temp_min_predictions = fit_and_forecast('temp_min (⁰C)', train_data, test_data)
-        temp_max_predictions = fit_and_forecast('temp_max (⁰C)', train_data, test_data)
-        humidity_min_predictions = fit_and_forecast('humidity_min (%)', train_data, test_data)
-        humidity_max_predictions = fit_and_forecast('humidity_max (%)', train_data, test_data)
-        wind_speed_min_predictions = fit_and_forecast('wind_speed_min (Kmph)', train_data, test_data)
-        wind_speed_max_predictions = fit_and_forecast('wind_speed_max (Kmph)', train_data, test_data)
-
-
-        
+# def dataConsistence():
+#     dic = {"Adilabad":"{'lon': 78.5, 'lat': 19.5}", 
+#             "Nizamabad":"{'lon': 78.25, 'lat': 18.75}",
+#             "Warangal":"{'lon': 79.5971, 'lat': 17.9821}",
+#             "Karimnagar":"{'lon': 79.1328, 'lat': 18.4348}",
+#             "Khammam":"{'lon': 80.3333, 'lat': 17.5}"}
+#     latlon = ast.literal_eval(dic[district])
+    
+#     lat = latlon['lat']
+#     lon = latlon['lon']

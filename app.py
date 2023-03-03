@@ -5,7 +5,7 @@ from flask import Flask, jsonify , render_template , url_for , request
 from weather_aqi import Realtimeweather,Realtimeaqi
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime
-from weather_model import runner 
+from AQI_model import AQIrunner ,dataConsistence
 app = Flask(__name__)
 
 @app.route('/')
@@ -48,11 +48,13 @@ def plot():
     y = df['Minimum Temperature']
     return jsonify({'x': x.tolist(), 'y': y.tolist(), 'loc': loc})
 
-def scheduled_job():
-    runner()
+
+ 
     
 if __name__ == '__main__':
     app.run(host='localhost', port=8080)
     scheduler = BackgroundScheduler()
-    scheduler.add_job(scheduled_job, 'interval', days=1, start_date=datetime.today())
+    scheduler.add_job(AQIrunner, 'interval', days=7, start_date=datetime.today())
+    scheduler.add_job(dataConsistence, 'interval', hours=2, start_date=datetime.today())
+
     scheduler.start()
