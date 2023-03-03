@@ -4,7 +4,7 @@
 	<title>Modern Weather Website</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!--<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}" > !-->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/weather.css')}}" > 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src={{url_for('static',filename='js/weather.js')}}></script>
@@ -36,11 +36,12 @@
 	<h2>Heat Wave Prediction</h2>
 	
 	</div>
-    
-	<h2 class="tile" id='tm' ><h1>Temprature</h1></h2><!--current temprature-->
-	<h2 class="tile" id='hu' ><h1>Humidity</h1></h2><!--current humidity-->
-	<h2 class="tile" id='ws' ><h1>Wind speed</h2></h2><!--current windspeed-->
-     
+	
+	<div style = "display: flex; justify-content : space-evenly ;"> 
+    <h2 class="tile" id='tm' ></h2>
+	<h2 class="tile" id='hu' ></h2><!--current humidity-->
+	<h2 class="tile" id='ws' ></h2><!--current windspeed-->
+	</div>
 	<div id="Wplot"></div>
 	
 	<!-- Footer -->

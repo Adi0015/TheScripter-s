@@ -1,0 +1,103 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: #1c1f2b;
+color: #fff;
+}
+
+
+/* Header */
+.header {
+display: flex;
+justify-content: flex-start;
+align-items: center;
+padding: 20px;
+background-color: #13161f;
+}
+
+.header a {
+    margin-left: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Navigation */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #13161f;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.navigation a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.navigation a:hover {
+    background-color: #fff;
+    color: #333;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+  
+  /* Tiles */
+  .tile {
+    background-color: #fff;
+    color: #333;
+    text-align: center;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #999;
+  }
+  
+  /* Plotly chart */
+  #Wplot {
+    height: 50vh;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #999;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #4b4b4b;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .navigation select {
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #44c0e6;
+    color: #fff;
+    cursor: pointer;
+    width: 50%;
+  }
+  

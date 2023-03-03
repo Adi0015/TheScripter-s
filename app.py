@@ -69,7 +69,7 @@ def dataConsistence():
     Weather_dataConsistence()
     
 if __name__ == '__main__':
-    app.run(host='localhost', port=8080)
+    app.run(host='localhost', port=8080 ,debug=True)
     scheduler = BackgroundScheduler()
     scheduler.add_job(Model_Trainer, 'interval', days=7, start_date=datetime.today())
     scheduler.add_job(dataConsistence, 'interval', hours=2, start_date=datetime.today())
