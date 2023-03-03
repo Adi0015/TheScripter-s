@@ -30,6 +30,7 @@ def Realaqi():
         result[pollutant] = conc
     return jsonify({'result': result})   
 
+
 @app.route('/aqi')
 def aqi():
     return render_template('aqi.html')

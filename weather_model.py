@@ -13,6 +13,8 @@ def datesForForecast():
     
     return train_end_date,train_start_date,pred_start_date,pred_end_date
 
+
+
 # def dataConsistence():
 #     dic = {"Adilabad":"{'lon': 78.5, 'lat': 19.5}", 
 #             "Nizamabad":"{'lon': 78.25, 'lat': 18.75}",

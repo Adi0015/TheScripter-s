@@ -69,7 +69,6 @@ def Realtimeaqi(district):
     
     aqi,pollutant_concentrations, = aqi_data
     # print(pollutant_concentrations)
-    
     # print(aqi)
     return aqi,pollutant_concentrations
     

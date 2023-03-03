@@ -37,6 +37,7 @@ def calculate_aqi(data):
     return aqi,all
 
 
+
 def calculate_aqi_pollutant(conc, pollutant):
 # Calculate AQI for each pollutant
 

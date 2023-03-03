@@ -91,6 +91,7 @@ def dataConsistence():
     
 
     # Read existing data from AQI.csv file
+    
     data = pd.read_csv("AQI.csv")
 
     # Define dictionary of district names and their corresponding lat/lon coordinates
