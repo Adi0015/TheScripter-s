@@ -34,14 +34,6 @@ def Realtimeweather(district):
     
     return weather
 
-# def loc_in_latlon(district):
-#     dic = {"Adilabad":"{'lon': 78.5, 'lat': 19.5}", 
-#             "Nizamabad":"{'lon': 78.25, 'lat': 18.75}",
-#             "Warangal":"{'lon': 79.5971, 'lat': 17.9821}",
-#             "Karimnagar":"{'lon': 79.1328, 'lat': 18.4348}",
-#             "Khammam":"{'lon': 80.3333, 'lat': 17.5}"}
-#     latlon = ast.literal_eval(dic[district])
-#     return latlon
 
 def Realtimeaqi(district):
     

@@ -46,7 +46,7 @@ def calculate_aqi_pollutant(conc, pollutant):
 # Define the AQI breakpoints and corresponding values for each pollutant
     if pollutant == "SO2":
         breakpoints = [0, 40, 80, 380, 800, 1600]
-        aqi_values = 	[0, 50, 100, 200, 300, 400, 500]
+        aqi_values = 	[0, 50, 100, 150, 200, 300, 400]
     elif pollutant == "O3":
         breakpoints = 	[0, 50, 100, 168, 208, 748]
         aqi_values = [0, 50, 100, 150, 200, 300, 400]
@@ -57,11 +57,11 @@ def calculate_aqi_pollutant(conc, pollutant):
         breakpoints = [0, 50, 100, 250, 350, 430]
         aqi_values = [0, 50, 100, 150, 200, 300, 400]
     elif pollutant == "PM2.5":
-        breakpoints = [0, 30, 60, 90, 130, 250]
-        aqi_values = [0, 50, 100, 150,200, 300,400]
+        breakpoints = [0, 30, 60, 90, 120, 250]
+        aqi_values = [0, 50, 100, 150, 200, 300,400]
     elif pollutant == "NH3":
         breakpoints = [0, 200, 400, 800, 1200, 1800]
-        aqi_values = [0, 50, 100, 200, 300, 400, 500]
+        aqi_values = [0, 50, 100, 150, 200, 300, 400]
     
     
     

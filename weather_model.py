@@ -10,7 +10,7 @@ import datetime
 
 def datesForForecast():
     train_end_date = date.today() - timedelta(days=1)
-    train_start_date = train_end_date - timedelta(days=672)
+    train_start_date = train_end_date - timedelta(days=1095)
     pred_start_date = date.today()
     pred_end_date = pred_start_date + timedelta(days=303)
     
