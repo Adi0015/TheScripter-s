@@ -14,7 +14,7 @@ from weather_aqi import Realtimeaqi
 def datesForForecast():
     train_end_date = date.today() - timedelta(days=2)
     train_start_date = train_end_date - timedelta(days=672)
-    pred_start_date = date.today()
+    pred_start_date = date.today() -timedelta(days=1)
     pred_end_date = pred_start_date + timedelta(days=303)
     
     return train_end_date,train_start_date,pred_start_date,pred_end_date
@@ -25,6 +25,10 @@ def AQI_forecast(district):
    
     df['Date'] = pd.to_datetime(df['Date']).dt.date
     train_end_date, train_start_date, pred_start_date, pred_end_date = datesForForecast()
+    train_end_date = train_end_date.strftime('%Y-%m-%d')
+    train_start_date = train_start_date.strftime('%Y-%m-%d')
+    pred_start_date = pred_start_date.strftime('%Y-%m-%d')
+    pred_end_date = pred_end_date.strftime('%Y-%m-%d')
     
     temp = pd.DataFrame({'Date': pd.date_range(pred_start_date, pred_end_date, freq='D'),'Location': district,'AQI':0,'NO2':0,'SO2':0, 'PM2.5':0, 'PM10':0})
     df = pd.concat([df, temp])
@@ -65,8 +69,9 @@ def AQI_forecast(district):
     pm25_predictions = results_pm25.predict(start=start_date, end=end_date, dynamic=False)
     
     pm10_predictions = results_pm10.predict(start=start_date, end=end_date, dynamic=False)
-
-    predictions = pd.DataFrame({'Date': pd.date_range(pred_start_date, pred_end_date, freq='D'),'Location': district,'AQI': aqi_predictions, 
+    
+    num_days = len(aqi_predictions)
+    predictions = pd.DataFrame({'Date': pd.date_range(pred_start_date, periods=num_days, freq='D'),'Location': district,'AQI': aqi_predictions, 
                                 'NO2':no2_predictions,'SO2':so2_predictions,'PM2.5':pm25_predictions,'PM10':pm10_predictions})
     
     return predictions

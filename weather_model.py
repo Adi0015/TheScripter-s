@@ -11,20 +11,24 @@ import datetime
 def datesForForecast():
     train_end_date = date.today() - timedelta(days=1)
     train_start_date = train_end_date - timedelta(days=672)
-    pred_start_date = date.today() + timedelta(days=1)
+    pred_start_date = date.today()
     pred_end_date = pred_start_date + timedelta(days=303)
     
     return train_end_date,train_start_date,pred_start_date,pred_end_date
 
 
 def weather_forecast(district):
-    data = pd.read_csv("/Users/aman/Desktop/NASSCOM/TheScripter-s/Preprocessing/Weather/all_data.csv")
+    data = pd.read_csv("/home/suku/Desktop/projects/T-aims/TheScripter-s/Preprocessing/Weather/all_data.csv")
 
     df = data[data['Location'] == district]
 
     df['Date'] = pd.to_datetime(df['Date']).dt.date
 
     train_end_date, train_start_date, pred_start_date, pred_end_date = datesForForecast()
+    train_end_date = train_end_date.strftime('%Y-%m-%d')
+    train_start_date = train_start_date.strftime('%Y-%m-%d')
+    pred_start_date = pred_start_date.strftime('%Y-%m-%d')
+    pred_end_date = pred_end_date.strftime('%Y-%m-%d')
 
     temp = pd.DataFrame({'Date': pd.date_range(pred_start_date, pred_end_date, freq='D'), 'Location': district,
                          'Minimum Temperature': 0,
@@ -32,7 +36,7 @@ def weather_forecast(district):
 
     df = pd.concat([df, temp])
 
-    df['Date'] = pd.to_datetime(df['Date']).dt.date
+    df['Date'] = pd.to_datetime(df['Date'])
 
     df = df.set_index('Date')
 
@@ -58,12 +62,15 @@ def weather_forecast(district):
 
     humidity_predictions = results_humidity.predict(start=start_date, end=end_date, dynamic=False)
 
+    num_days = len(temp_min_predictions)
     predictions = pd.DataFrame(
-        {'Date': pd.date_range(pred_start_date, pred_end_date, freq='D'), 'Location': district,
-         'Minimum Temperature': temp_min_predictions,
-         'Maximum Temperature': temp_max_predictions, 'Relative Humidity': humidity_predictions})
+    {'Date': pd.date_range(pred_start_date, periods=num_days, freq='D'), 'Location': district,
+     'Minimum Temperature': temp_min_predictions,
+     'Maximum Temperature': temp_max_predictions, 'Relative Humidity': humidity_predictions})
+
 
     return predictions
+
 
 
 districts = ['Adilabad', 'Nizamabad', 'Khammam', 'Karimnagar', 'Warangal']
@@ -78,7 +85,7 @@ def weather_runner():
         all_predictions = pd.concat([all_predictions, predictions], axis=0, ignore_index=True)
 
     all_predictions = all_predictions[all_predictions['Date'] != str(date.today())]
-    all_predictions.to_csv("TheScripter-s/Data/Weather_Data/weather_forecast.csv", index=False)
+    all_predictions.to_csv("weather_forecast.csv", index=False)
 
 
 
