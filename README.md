@@ -68,9 +68,7 @@ Start the application:
 python3 app.py
 ```
 ## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
+![4d81f26b-8441-4108-99f0-6f4c9b4daa2c](https://user-images.githubusercontent.com/96522398/222914073-2aeec4aa-a9b1-429e-8c27-f6ebff105601.jpg)
 
 ### Team Members
 
