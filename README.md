@@ -31,8 +31,8 @@ To develop solutions that can predict the occurrence of heat waves and the Air Q
 - > Model Accuracy for :
 - > Model Workflow 
 
-- > ![4d81f26b-8441-4108-99f0-6f4c9b4daa2c](https://user-images.githubusercontent.com/96522398/222914073-2aeec4aa-a9b1-429e-8c27-f6ebff105601.jpg)
-    
+<img width="773" alt="Screenshot 2023-03-04 at 9 35 23 PM" src="https://user-images.githubusercontent.com/96522398/222916487-ec0343a8-b1f4-4ee6-89fc-099cb7d716d3.png">
+
 
 ### Project Features
 
