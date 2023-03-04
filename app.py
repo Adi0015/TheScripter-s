@@ -42,23 +42,68 @@ def weather():
 
     
 @app.route('/plot/weather', methods=['GET', 'POST'])
-def WeatherPlot():
+def weatherPlot():
     loc = request.args.get('loc')
-    df = pd.read_csv('Preprocessing/Weather/all_data.csv')
+    weatherVar = request.args.get('weatherVar')
+
+    # Load weather forecast data for the specified location
+    df = pd.read_csv('Data/Weather_Data/weather_forecast.csv')
     df = df[df['Location'] == loc]
-    x = df['Date']
-    y = df['Minimum Temperature']
-    return jsonify({'x': x.tolist(), 'y': y.tolist(), 'loc': loc})
+    # Extract x and y data based on selected weather variable
+    if weatherVar == "MinTemp":
+        x = df['Date']
+        y = df['Minimum Temperature']
+    elif weatherVar == "MaxTemp":
+        x = df['Date']
+        y = df['Maximum Temperature']
+    elif weatherVar == "Humidity":
+        x = df['Date']
+        y = df['Relative Humidity']
+    elif weatherVar == "HeatWaveIndex":
+    # Calculate heat wave index and add to dataframe
+        hw_index = []
+        max_temp = df['Maximum Temperature']
+        temp_threshold = 40
+        for i in range(len(max_temp)):
+            if max_temp[i] >= temp_threshold:
+                if i > 0 and hw_index[i-1] > 0:
+                    hw_index.append(hw_index[i-1] + 1)
+                else:
+                    hw_index.append(1)
+            else:
+                hw_index.append(0)
+        df['HeatWaveIndex'] = hw_index
+        x = df['Date']
+        y = df['HeatWaveIndex']
+
+    return jsonify({'x': x.tolist(), 'y': y.tolist(), 'loc': loc, 'weatherVar': weatherVar})
+
+
+
 
 
 @app.route('/plot/aqi', methods=['GET', 'POST'])
 def AqiPlot():
     loc = request.args.get('loc')
-    df = pd.read_csv('/home/suku/Desktop/projects/T-aims/TheScripter-s/Preprocessing/AQI/AQI.csv')
+    aqiVar = request.args.get('aqiVar')
+    df = pd.read_csv('Data/AQI_Data/AQI_forecast.csv')
     df = df[df['Location'] == loc ]
-    x = df['Date']
-    y = df['AQI']
-    return jsonify({'x': x.tolist(), 'y': y.tolist(), 'loc': loc })
+    if aqiVar == 'AQI' :
+        x = df['Date']
+        y = df['AQI']
+    elif aqiVar == 'PM2.5' :
+        x = df['Date']
+        y = df['PM2.5']
+    elif aqiVar == 'PM10' :
+        x = df['Date']
+        y = df['PM10']
+    elif aqiVar == 'NO2' :
+        x = df['Date']
+        y = df['NO2']
+    elif aqiVar == 'SO2' :
+        x = df['Date']
+        y = df['SO2']
+    return jsonify({'x': x.tolist(), 'y': y.tolist(), 'loc': loc ,'aqiVar': aqiVar})
 
 def Model_Trainer():
     AQIrunner()

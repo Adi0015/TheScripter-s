@@ -29,11 +29,9 @@
 	<a href="/weather">Weather</a>
 	</div>
 
-	<!-- Map with AQI values -->
-	
-	<!-- Heat wave prediction tile -->
+
 	<div class="tile">
-	<h2>Heat Wave Prediction</h2>
+	<h2>Current Weather</h2>
 	
 	</div>
 	
@@ -42,6 +40,17 @@
 	<h2 class="tile" id='hu' ></h2><!--current humidity-->
 	<h2 class="tile" id='ws' ></h2><!--current windspeed-->
 	</div>
+	
+	<div class="tile">
+	<h2>Heat Wave Prediction</h2>
+	</div>
+	<label for="weatherVar">Weather Variable:</label>
+	<select id="weatherVar">
+	<option value="MinTemp">Minimum Temperature</option>
+	<option value="MaxTemp">Maximum Temperature</option>
+	<option value="Humidity">Humidity</option>
+	<option value="HeatWaveIndex">Heat Wave Index</option>
+	</select>
 	<div id="Wplot"></div>
 	
 	<!-- Footer -->

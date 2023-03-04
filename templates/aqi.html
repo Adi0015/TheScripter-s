@@ -10,7 +10,6 @@
 	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src={{url_for('static',filename='js/AqiPlot.js')}}></script>
 	<script src={{url_for('static',filename='js/aqi.js')}}></script>
-
 </head>
 <body>
 	<!-- Header -->
@@ -31,20 +30,43 @@
 	<a href="/weather">Weather</a>
 	</div>
 
-	<!-- Map with AQI values -->
 	
-	<!-- Heat wave prediction tile -->
 	
 	</div>
+	<div class="tile">
+		<h2>Current AQI </h2>
+	</div>
+		
+	
     <div style="display: flex; justify-content: space-evenly;" >
-	<h2 class="tile" id='aqi' ></h2><!--current temprature-->
 	<h2 class="tile" id='pm10' ></h2><!--current temprature-->
 	<h2 class="tile" id='pm25' ></h2><!--current temprature-->
 	<h2 class="tile" id='no2' ></h2><!--current temprature-->
 	<h2 class="tile" id='so2' ></h2><!--current temprature-->
 	</div>
-	<!--<h2 class="tile" id='hu' ><h1>Humidity</h1></h2>current humidity-->
-	<!--<h2 class="tile" id='ws' ><h1>Wind speed</h2></h2>current windspeed-->
+	<br>
+	<div style="display: flex; justify-content: space-evenly">
+		<h2 class="tile" id='aqi' ></h2><!--current temprature-->
+	</div>
+	<br>
+	<div class="tile">
+		<h2>AQI Prediction</h2>
+	</div>
+	<br>
+	<br>
+	<a style="display: flex; justify-content: center;">
+	<img src="static/img/breakpoint.jpeg" alt="GitHub" width="500" height="50">
+	</a>
+	<br>
+	
+	<label  for="aqiVar" >AQI Variable:</label>
+	<select id="aqiVar">
+	<option value="AQI">AQI</option>
+	<option value="PM2.5">PM2.5</option>
+	<option value="PM10">PM10</option>
+	<option value="SO2">SO2</option>
+	<option value="NO2">NO2</option>
+	</select>
 	<div id="Aplot"></div>
 	<!-- Footer -->
 	<footer>

@@ -31,7 +31,8 @@ def calculate_aqi(data):
         max_pollutant = "PM2.5"
     elif aqi_values.index(max_aqi) == 3:
         max_pollutant = "PM10"
-    # print(aqi_pm10,aqi_pm25,pm10_conc)
+    print(aqi_pm10,aqi_pm25,pm10_conc)
+    
     aqi = {'AQI':max_aqi, "Main pollutant":max_pollutant,"value": max_pollutant_conc} 
     all = {"PM10" : pm10_conc,"PM2.5":pm25_conc,"NO2":no2_conc,"SO2":so2_conc} 
     return aqi,all
@@ -56,8 +57,8 @@ def calculate_aqi_pollutant(conc, pollutant):
         breakpoints = [0, 50, 100, 250, 350, 430]
         aqi_values = [0, 50, 100, 150, 200, 300, 400]
     elif pollutant == "PM2.5":
-        breakpoints = [0, 40, 80, 120, 250, 450]
-        aqi_values = [0, 50, 100, 150, 200, 300,400]
+        breakpoints = [0, 30, 60, 90, 130, 250]
+        aqi_values = [0, 50, 100, 150,200, 300,400]
     elif pollutant == "NH3":
         breakpoints = [0, 200, 400, 800, 1200, 1800]
         aqi_values = [0, 50, 100, 200, 300, 400, 500]

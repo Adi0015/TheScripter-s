@@ -15,7 +15,7 @@ def datesForForecast():
     train_end_date = date.today() - timedelta(days=2)
     train_start_date = train_end_date - timedelta(days=672)
     pred_start_date = date.today()
-    pred_end_date = pred_start_date + timedelta(days=183)
+    pred_end_date = pred_start_date + timedelta(days=303)
     
     return train_end_date,train_start_date,pred_start_date,pred_end_date
 
