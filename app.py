@@ -105,6 +105,7 @@ def AqiPlot():
         y = df['SO2']
     return jsonify({'x': x.tolist(), 'y': y.tolist(), 'loc': loc ,'aqiVar': aqiVar})
 
+
 def Model_Trainer():
     AQIrunner()
     weather_runner()
@@ -114,8 +115,10 @@ def dataConsistence():
     Weather_dataConsistence()
     
 if __name__ == '__main__':
-    app.run(host='localhost', port=8080 ,debug=True)
     scheduler = BackgroundScheduler()
     scheduler.add_job(Model_Trainer, 'interval', days=7, start_date=datetime.today())
-    scheduler.add_job(dataConsistence, 'interval', hours=2, start_date=datetime.today())
+    scheduler.add_job(dataConsistence, 'interval', minutes=2, start_date=datetime.today())
     scheduler.start()
+    scheduler.get_jobs()
+    app.run(host='localhost', port=3000, debug=True)
+

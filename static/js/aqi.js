@@ -2,7 +2,7 @@ function getRecentData() {
     let loc = $('#loc').find(":selected").val();
     console.log(loc);
     $.ajax({
-      url: `http://localhost:8080/api/aqi`,
+      url: `http://localhost:3000/api/aqi`,
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({ loc: loc }),
